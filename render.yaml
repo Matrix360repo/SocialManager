@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: matrix360-socialmediamanager
+    runtime: docker
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: MATRIX360_CLOUD_MODE
+        value: "1"
+      - key: MATRIX360_DATA_ROOT
+        value: /var/data
+      - key: MATRIX360_API_KEY
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: MATRIX_MODEL
+        value: gpt-4.1-mini
+    disk:
+      name: matrix360-persistent-data
+      mountPath: /var/data
+      sizeGB: 1
